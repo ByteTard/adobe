@@ -278,6 +278,58 @@
         margin-left: 5px;
     }
 </style>
+script>
+        let cart = [];
+        let discountApplied = false;
+
+        $(document).on('click', '.add-to-cart', function() {
+            let name = $(this).data('name');
+            let price = parseFloat($(this).data('price'));
+            cart.push({ name, price });
+            updateCart();
+        });
+
+        function updateCart() {
+            let cartList = $('#cart-items');
+            let cartTotal = $('#cart-total');
+            let floatingCartTotal = $('#floating-cart-total');
+            let floatingCart = $('#floating-cart');
+            cartList.empty();
+            let total = 0;
+
+            cart.forEach(item => {
+                let li = $('<li>').text(`${item.name} - $${item.price}`).addClass('list-group-item');
+                cartList.append(li);
+                total += item.price;
+            });
+
+            if (discountApplied) {
+                total *= 0.85;
+            }
+            cartTotal.text(total.toFixed(2));
+            floatingCartTotal.text(total.toFixed(2));
+            floatingCart.toggle(cart.length > 0);
+        }
+
+        $('#apply-coupon').click(function() {
+            let couponCode = $('#coupon').val();
+            if (couponCode === 'tiktok' && !discountApplied) {
+                discountApplied = true;
+                updateCart();
+            }
+        });
+
+        $('#clear-cart').click(function() {
+            cart = [];
+            discountApplied = false;
+            updateCart();
+        });
+
+        $('#checkout').click(function() {
+            let total = $('#cart-total').text();
+            window.location.href = `https://cash.app/$ballexd?amount=${total}`;
+        });
+    </script>
 </body>
 </html>
 
