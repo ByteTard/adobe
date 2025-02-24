@@ -106,7 +106,7 @@
         }
     </style>
     <script>
-        let titleText = "----! ADOBE -!---";
+        let titleText = "<---- ADOBE ---->";
         let position = 0;
         function scrollTitle() {
             document.title = titleText.substring(position) + titleText.substring(0, position);
@@ -123,22 +123,22 @@
         <div id="brdheader" class="block">
             <div class="box">
                 <div id="brdtitle" class="inbox">
-                    <h1><a href="#">Byte<span>Tard</span></a></h1>
+                    <h1><a href="/gs">Byte<span>Tard</span></a></h1>
                     <div id="brddesc"></div>
                 </div>
                 <div id="brdmenu" class="inbox">
                     <ul>
-                        <li id="nav-notifications"><span class="fake-link" id="notifications"><i class="fa fa-lg fa-bell" id="notifications-badge" data-after-content="0"></i></span></li>
+                        
                         <li class="nav-item"><a href="/gs">Main</a></li>
-                        <li class="nav-item"><a href="/products">Products</a></li>
+                        <li class="nav-item premium"><a href="/products">Products</a></li> <li id="nav-notifications"><span class="fake-link" id="notifications"><i class="fa fa-lg fa-bell" id="notifications-badge" data-after-content="5"></i></span></li>
                         <li class="nav-item"><a href="/contact">Contact</a></li>
                         <li class="nav-item"><a href="/adobe">Adobe</a></li>
-                        <li class="nav-item premium"><a href="https://www.tiktok.com/@scaringxd"><b>TikTok</b></a></li>
-                        <li class="nav-item"><a href="/whitecocao">WhiteCocao</a></li>
+                        <!--li class="nav-item"><a href="https://www.tiktok.com/@scaringxd"><b>TikTok</b></a></li>
+                        <li class="nav-item"><a href="/whitecocao">WhiteCocao</a></li-->
                         <li class="nav-item search-bar">
                              <input type="text" id="search-bar" placeholder="Search my shop" onkeydown="searchRedirect(event)">
                             <button type="submit"><i class="fa fa-search"></i></button>
-				<li class="nav-item premium"><a data-bs-toggle="modal" data-bs-target="#cartModal"><b>Check Out</b></a></li>
+				
                         </li>
                     </ul>
                 </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div id="brdwelcome" class="inbox">
                     <p class="ilk">Logged in as <b>Guest</b></p>
-                    <p class="ikinci"><b>HTML Free Video Lessons</b> Starting 03/01/2025 [<a href="/404">See lessons</a>]</p>
+                    <p class="ikinci"><b>HTML Video Lessons</b> Starting 03/01/2025 [<a href="/404">See blog lessons</a>]</p>
                     <p><a href="https://t.me/ByteTardz">Join us on Telegram</a> • <a href="https://discord.gg/eQfDx6QP">Join us on discord</a></p>
                 </div>
             </div>
@@ -250,7 +250,8 @@
         <div id="brdfooter" class="block">
             <div class="box">
                 <div class="inbox">
-                    <p>ByteTard 2025</p>
+                    <!--p>ByteTard 2025</p-->
+			<h1><a href="/gs">Byte<span>Tard</span></a></h1>
                     <ul>
                         <li><a href="/tos">Terms and Conditions / Privacy Policy</a></li>
                     </ul>
@@ -281,58 +282,7 @@
         margin-left: 5px;
     }
 </style>
-<script>
-        let cart = [];
-        let discountApplied = false;
 
-        $(document).on('click', '.add-to-cart', function() {
-            let name = $(this).data('name');
-            let price = parseFloat($(this).data('price'));
-            cart.push({ name, price });
-            updateCart();
-        });
-
-        function updateCart() {
-            let cartList = $('#cart-items');
-            let cartTotal = $('#cart-total');
-            let floatingCartTotal = $('#floating-cart-total');
-            let floatingCart = $('#floating-cart');
-            cartList.empty();
-            let total = 0;
-
-            cart.forEach(item => {
-                let li = $('<li>').text(`${item.name} - $${item.price}`).addClass('list-group-item');
-                cartList.append(li);
-                total += item.price;
-            });
-
-            if (discountApplied) {
-                total *= 0.85;
-            }
-            cartTotal.text(total.toFixed(2));
-            floatingCartTotal.text(total.toFixed(2));
-            floatingCart.toggle(cart.length > 0);
-        }
-
-        $('#apply-coupon').click(function() {
-            let couponCode = $('#coupon').val();
-            if (couponCode === 'tiktok' && !discountApplied) {
-                discountApplied = true;
-                updateCart();
-            }
-        });
-
-        $('#clear-cart').click(function() {
-            cart = [];
-            discountApplied = false;
-            updateCart();
-        });
-
-        $('#checkout').click(function() {
-            let total = $('#cart-total').text();
-            window.location.href = `https://cash.app/$bytetard?amount=${total}`;
-        });
-    </script>
 </body>
 </html>
 
